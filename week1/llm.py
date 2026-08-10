@@ -53,20 +53,21 @@ Text: {blob}
 Return ONLY the JSON object.
 """
 
-response = client.models.generate_content(
-    model="gemini-3.6-flash",
-    contents=prompt,
-)
+# response = client.models.generate_content(
+#     model="gemini-3.6-flash",
+#     contents=prompt,
+# )
 
-print(f" Model response : {response.text}")
+# print(f" Model response : {response.text}")
 # Case 1 : Correct data
-data = json.loads(response.text)
+# data = json.loads(response.text)
 # Case 2 : Corrupted data - Validation Error
-# data = {
-#     "name": 123,
-#     "email": "dana@acme.co",
-#     "company": "Acme"
-# }
+data = {
+    "name": 123,
+    "email": "dana@acme.co",
+    "company": "Acme",
+    "country" : "Australia"
+}
 
 # WEEK 1 - TASK 2B : corrupted ```json response....
 # response = '''```json
@@ -78,7 +79,7 @@ data = json.loads(response.text)
 # print(f"Converted to python dictionary : {data}")
 # print(f"Dict type : {type(data)}")
 
-# contact = Contact.model_validate(data)
-# print(f"Object validation reponse : {contact}")
+contact = Contact.model_validate(data)
+print(f"Object validation reponse : {contact}")
 
 
