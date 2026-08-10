@@ -45,22 +45,22 @@ client = genai.Client()
 # WEEK 1 - TASK 2 : Extract and validate json data from text
 
 # CASE 1 : Correct data 
-# blob = "hey it's Walter White, ping me at heisenberg@bluepill.co"
+blob = "hey it's Walter White, ping me at heisenberg@bluepill.co"
 
-# prompt = f"""
-# Extract a Contact as JSON matching this schema: {schema}
-# Text: {blob}
-# Return ONLY the JSON object.
-# """
+prompt = f"""
+Extract a Contact as JSON matching this schema: {schema}
+Text: {blob}
+Return ONLY the JSON object.
+"""
 
-# response = client.models.generate_content(
-#     model="gemini-3.6-flash",
-#     contents=prompt,
-# )
+response = client.models.generate_content(
+    model="gemini-3.6-flash",
+    contents=prompt,
+)
 
-# print(f" Model response : {response.text}")
+print(f" Model response : {response.text}")
 # Case 1 : Correct data
-# data = json.loads(response.text)
+data = json.loads(response.text)
 # Case 2 : Corrupted data - Validation Error
 # data = {
 #     "name": 123,
@@ -69,15 +69,16 @@ client = genai.Client()
 # }
 
 # WEEK 1 - TASK 2B : corrupted ```json response....
-response = '''```json
-{"name": "Dana", "email": "dana@acme.co", "company": "Acme"}
-```'''
-cleaned = response.replace("```json", "").replace("```", "").strip()
-data = json.loads(cleaned)
+# response = '''```json
+# {"name": "Dana", "email": "dana@acme.co", "company": "Acme"}
+# ```'''
+# cleaned = response.replace("```json", "").replace("```", "").strip()
+# data = json.loads(cleaned)
 
-print(f"Converted to python dictionary : {data}")
-print(f"Dict type : {type(data)}")
+# print(f"Converted to python dictionary : {data}")
+# print(f"Dict type : {type(data)}")
 
-contact = Contact.model_validate(data)
-print(f"Object validation reponse : {contact}")
+# contact = Contact.model_validate(data)
+# print(f"Object validation reponse : {contact}")
+
 
